@@ -259,7 +259,7 @@ const main = async () => {
     }
     console.log(`${yes + no}:${yes}:${no}:${failed}`);
     console.log(`started storing block ${currentBlockNumber} into db at: ` + getCurrentTimeISOString());
-    //await Save(swapEvents, client, web3, prod_client);
+    await Save(swapEvents, client, web3, prod_client);
     console.log(`finished block ${currentBlockNumber} in ${(((new Date()).getTime() - start_time.getTime()) / 1000.0)} seconds`);
     PARSING = false;
   }

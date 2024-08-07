@@ -200,15 +200,12 @@ async function db_save_batch(events: any[], client: Client, block_creation_time:
   }
 }
 
-export async function Save(swapEvents: {}[], client: Client, web3: Web3, ETH2USD: Decimal, prod_client: Client) {
+export async function Save(swapEvents: {}[], client: Client, web3: Web3, prod_client: Client) {
   if (swapEvents.length == 0) return;
-  //const result = (await client.query("SELECT * FROM ethereum_price_hist ORDER BY updated_time DESC LIMIT 1")).rows[0];
-  //const ETH2USD = new Decimal(3200);
+  const result = (await client.query("SELECT * FROM ethereum_price_hist ORDER BY updated_time DESC LIMIT 1")).rows[0].token_price;
+  const ETH2USD = new Decimal(result);
   const block_timestamp = (new Date(parseInt((await web3.eth.getBlock(swapEvents[0].blockNumber)).timestamp) * 1000)).toISOString();
-  console.log(`start storing into db block ${swapEvents[0].blockNumber} at` + getCurrentTimeISOString());
   await db_save_batch(swapEvents, client, block_timestamp, ETH2USD, prod_client);
-
-
 }
 
 // Function to get the token addresses

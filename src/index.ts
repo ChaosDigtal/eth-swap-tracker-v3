@@ -259,7 +259,7 @@ const main = async () => {
     }
     console.log(`${yes + no}:${yes}:${no}:${failed}`);
     console.log(`started storing block ${currentBlockNumber} into db at: ` + getCurrentTimeISOString());
-    await Save(swapEvents, client, web3, prod_client);
+    //await Save(swapEvents, client, web3, prod_client);
     console.log(`finished block ${currentBlockNumber} in ${(((new Date()).getTime() - start_time.getTime()) / 1000.0)} seconds`);
     PARSING = false;
   }
@@ -304,7 +304,7 @@ const main = async () => {
     if (timer_ws) {
       clearTimeout(timer_ws);
     }
-    timer_ws = setTimeout(connectWebsocket, 15 * 1000);
+    timer_ws = setTimeout(connectWebsocket, 20 * 1000);
     alchemy.ws.on(filter, async (log) => {
       if (!ARRIVING) {
         ARRIVING = true;
@@ -321,7 +321,7 @@ const main = async () => {
       if (timer_ws) {
         clearTimeout(timer_ws);
       }
-      timer_ws = setTimeout(connectWebsocket, 15 * 1000);
+      timer_ws = setTimeout(connectWebsocket, 30 * 1000);
     })
   }
 
